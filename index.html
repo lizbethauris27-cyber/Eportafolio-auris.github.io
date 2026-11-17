@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-portafolio de evidencias — Lizbeth Auris</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#132a3e; --deep:#0e3a5c; --teal:#0e6b7a; --teal2:#0a8ea0;
+    --sun:#d9772a; --sand:#fbf0e6; --line:#e4e9ee; --bg:#eef2f7; --white:#fff;
+    --coral:#ef5a7a; --aqua:#13a0a8; --green:#27a35a;
+    --shadow:0 10px 32px rgba(14,58,92,.10);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.18;color:var(--deep)}
+  a{color:var(--teal)}
+  svg{display:block}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+
+  #prog{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--sun),var(--teal));z-index:120;transition:width .1s}
+
+  /* Nav */
+  header.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;gap:14px;height:60px}
+  .brand{font-family:Fraunces,serif;font-weight:700;color:var(--deep);font-size:1.05rem;margin-right:auto;display:flex;align-items:center;gap:9px}
+  .brand .k{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--deep);color:#fff;font-size:.9rem}
+  nav.links{display:flex;gap:2px;flex-wrap:wrap}
+  nav.links a{font-size:.82rem;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 11px;border-radius:8px;white-space:nowrap;cursor:pointer}
+  nav.links a:hover{background:var(--sand);color:var(--sun)}
+  nav.links a.on{background:var(--deep);color:#fff}
+  .menu-btn{display:none;border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 10px;font-size:1.1rem;cursor:pointer}
+  @media(max-width:900px){
+    nav.links{position:fixed;inset:60px 0 auto 0;background:#fff;flex-direction:column;padding:10px 22px;border-bottom:1px solid var(--line);display:none}
+    nav.links.open{display:flex}
+    nav.links a{padding:11px 8px;border-bottom:1px solid var(--line)}
+    .menu-btn{display:block}
+  }
+
+  /* Hero / portada */
+  .hero{background:linear-gradient(135deg,#0e3a5c 0%,#0e6b7a 100%);color:#fff;position:relative;overflow:hidden}
+  .hero:after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:rgba(217,119,42,.22)}
+  .hero .wrap{position:relative;padding:54px 22px 50px;display:grid;grid-template-columns:1fr;gap:24px;z-index:2}
+  @media(min-width:820px){.hero .wrap{grid-template-columns:1.1fr .9fr;align-items:start}}
+  .eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;font-weight:700;color:#bfe3e9}
+  .hero h1{color:#fff;font-size:2.4rem;margin:.3em 0 .25em}
+  .hero p.lead{font-size:1.08rem;max-width:560px;color:#eaf4f6;margin:0 0 20px}
+  .id-card{display:flex;flex-wrap:wrap;gap:12px 26px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:16px 20px}
+  .id-card div{min-width:150px}
+  .id-card .lab{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:#bfe3e9}
+  .id-card .val{font-weight:600;color:#fff}
+  .hero-side{display:flex;flex-direction:column;align-items:center;gap:20px}
+  .hero-art{text-align:center}
+  .hero-index{width:100%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:16px}
+  .hi-title{font-family:Fraunces,serif;font-weight:600;color:#fff;font-size:1.15rem;text-align:center;margin-bottom:12px}
+  .hi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .hidx{background:#fff;border-radius:12px;padding:12px 10px;text-decoration:none;text-align:center;display:block;transition:.15s;box-shadow:0 4px 14px rgba(0,0,0,.12);cursor:pointer}
+  .hidx:hover{transform:translateY(-3px)}
+  .hidx .ic{width:40px;height:40px;margin:0 auto 7px;border-radius:11px;background:#e6f3f5;display:grid;place-items:center}
+  .hidx:hover .ic{background:var(--deep)}
+  .hidx .ic svg [stroke]{transition:stroke .15s}
+  .hidx:hover .ic svg [stroke]{stroke:#fff}
+  .hidx .t{font-weight:800;color:var(--deep);font-size:.82rem;line-height:1.18}
+  .hidx .d{font-size:.7rem;color:#5a6b78;margin-top:3px}
+  .msym{position:absolute;color:rgba(255,255,255,.12);font-family:Fraunces,serif;font-weight:600;z-index:1;pointer-events:none}
+
+  /* stats */
+  .stats{background:var(--deep);color:#fff}
+  .stats .wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:22px}
+  @media(min-width:680px){.stats .wrap{grid-template-columns:repeat(4,1fr)}}
+  .stat{text-align:center}
+  .stat b{font-family:Fraunces,serif;font-size:2rem;color:#fff;display:block;line-height:1}
+  .stat span{font-size:.8rem;color:#bfe3e9}
+
+  /* Sections */
+  main section{padding:50px 0;border-bottom:1px solid var(--line)}
+  main section:nth-child(even){background:var(--white)}
+  .tag{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);background:#e6f3f5;padding:5px 12px;border-radius:999px;margin-bottom:10px}
+  h2.sec{font-size:1.9rem;margin:.1em 0 .5em}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* planeación */
+  #planeacion{scroll-margin-top:72px}
+  table.plan{width:100%;border-collapse:collapse;margin-top:16px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+  table.plan th{background:var(--deep);color:#fff;text-align:left;font-size:.82rem;padding:12px 14px}
+  table.plan td{padding:11px 14px;border-top:1px solid var(--line);font-size:.9rem;vertical-align:top}
+
+  /* Evidencias tabs */
+  #evidencias{scroll-margin-top:66px}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 8px}
+  .tab{border:1px solid var(--line);background:#fff;color:var(--deep);font-weight:700;font-size:.9rem;padding:11px 16px;border-radius:11px;cursor:pointer;display:flex;align-items:center;gap:9px;transition:.15s}
+  .tab svg{width:20px;height:20px}
+  .tab:hover{border-color:var(--teal)}
+  .tab.active{background:var(--deep);color:#fff;border-color:var(--deep);box-shadow:0 8px 20px rgba(14,58,92,.25)}
+  .tab.active svg [stroke]{stroke:#fff}
+  .ev{background:var(--white);border:1px solid var(--line);border-top:5px solid var(--teal);border-radius:0 0 16px 16px;padding:24px;box-shadow:var(--shadow);animation:fade .35s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+  .ev[hidden]{display:none}
+  .ev h3{margin:.1em 0 .3em;font-size:1.35rem}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px}
+  .chip{font-size:.74rem;font-weight:700;background:var(--sand);color:var(--sun);padding:4px 11px;border-radius:999px}
+  .chip.b{background:#e6f3f5;color:var(--teal)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--deep);color:#fff;text-decoration:none;font-weight:700;font-size:.88rem;padding:11px 18px;border-radius:10px;margin-top:6px;transition:.15s}
+  .btn:hover{background:var(--teal);transform:translateY(-2px)}
+
+  /* reflexión: 3 bloques infografía */
+  .rh{font-weight:800;color:var(--deep);margin:20px 0 4px;font-size:.95rem;display:flex;align-items:center;gap:8px}
+  .reflex3{display:grid;grid-template-columns:1fr;gap:16px;margin-top:14px}
+  @media(min-width:720px){.reflex3{grid-template-columns:repeat(3,1fr)}}
+  .rblock{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px 18px 20px;box-shadow:var(--shadow);transition:.18s;text-align:center}
+  .rblock:hover{transform:translateY(-6px)}
+  .rblock .clip{position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:22px;height:20px;border:3px solid #b9c2cf;border-bottom:none;border-radius:8px 8px 0 0;background:#eef2f7}
+  .rblock .step{width:62px;height:62px;border-radius:50%;margin:4px auto 10px;display:grid;place-items:center;color:#fff;font-weight:800;font-family:Fraunces,serif;font-size:1.3rem;box-shadow:0 8px 18px rgba(0,0,0,.15)}
+  .rblock h4{font-size:.98rem;margin:.2em 0 .5em;font-family:Inter;font-weight:800;color:#14233c}
+  .rblock p{font-size:.88rem;color:#44525f;margin:0;text-align:left}
+  .rblock.c1{border-top:5px solid var(--coral)} .rblock.c1 .step{background:var(--coral)} .rblock.c1 h4{color:var(--coral)}
+  .rblock.c2{border-top:5px solid var(--aqua)} .rblock.c2 .step{background:var(--aqua)} .rblock.c2 h4{color:var(--aqua)}
+  .rblock.c3{border-top:5px solid var(--green)} .rblock.c3 .step{background:var(--green)} .rblock.c3 h4{color:var(--green)}
+
+  /* mundos */
+  .mundos{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}
+  @media(min-width:620px){.mundos{grid-template-columns:repeat(4,1fr)}}
+  .mundo{text-align:center;background:#f3f7f8;border:1px solid var(--line);border-radius:12px;padding:12px 8px;transition:.15s}
+  .mundo:hover{transform:translateY(-4px);border-color:var(--teal)}
+  .mundo svg{width:40px;height:40px;margin:0 auto 6px}
+  .mundo b{display:block;font-size:.82rem;color:var(--deep)}
+  .mundo span{font-size:.72rem;color:#5a6b78}
+
+  /* habilidades */
+  .skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:18px}
+  .skill{display:flex;gap:12px;align-items:flex-start;background:var(--white);border:1px solid var(--line);border-radius:13px;padding:15px 16px;transition:.15s}
+  .skill:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .skill .si{flex:0 0 36px;height:36px;border-radius:10px;background:#e6f3f5;display:grid;place-items:center}
+  .skill .si svg{width:20px;height:20px}
+  .skill b{color:var(--deep)}
+  .skill span{display:block;font-size:.86rem;color:#5a6b78;margin-top:3px}
+
+  /* filosofía */
+  .philo{background:linear-gradient(140deg,#0e3a5c,#0e6b7a);color:#eef7f8;border-radius:18px;padding:28px 30px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .philo h2{color:#fff} .philo p{color:#eaf4f6;position:relative;z-index:2}
+  .philo-art{position:absolute;right:-6px;bottom:-6px;opacity:.16;width:190px}
+
+  .refs{font-size:.86rem;color:#33495a}
+  .refs li{margin:.5em 0;padding-left:1.4em;text-indent:-1.4em;list-style:none}
+  footer{padding:30px 0;text-align:center;color:#6a7b88;font-size:.82rem}
+
+  #top{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;background:var(--deep);color:#fff;border:none;font-size:1.3rem;cursor:pointer;box-shadow:0 10px 24px rgba(14,58,92,.4);opacity:0;pointer-events:none;transition:.25s;z-index:110}
+  #top.show{opacity:1;pointer-events:auto}
+  #top:hover{background:var(--teal)}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+
+<!-- sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <g id="i-plan"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="#0e6b7a" stroke-width="2"/><line x1="3" y1="9" x2="21" y2="9" stroke="#0e6b7a" stroke-width="2"/><line x1="9" y1="9" x2="9" y2="20" stroke="#0e6b7a" stroke-width="2"/><line x1="15" y1="9" x2="15" y2="20" stroke="#0e6b7a" stroke-width="2"/></g>
+  <g id="i-video"><rect x="2" y="5" width="14" height="14" rx="2.5" fill="none" stroke="#0e6b7a" stroke-width="2"/><path d="M16 10l6-3v10l-6-3z" fill="none" stroke="#0e6b7a" stroke-width="2" stroke-linejoin="round"/><path d="M7 9l4 3-4 3z" fill="#d9772a"/></g>
+  <g id="i-game"><path d="M4 13h16l-2 5a3 3 0 0 1-3 2H9a3 3 0 0 1-3-2z" fill="none" stroke="#0e6b7a" stroke-width="2" stroke-linejoin="round"/><circle cx="9" cy="16" r="1.4" fill="#d9772a"/><circle cx="15" cy="16" r="1.4" fill="#d9772a"/><path d="M12 13V9m0 0l-4-3m4 3l4-3" fill="none" stroke="#0e6b7a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="i-rubric"><rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="#0e6b7a" stroke-width="2"/><path d="M8 8l1.5 1.5L12 7" fill="none" stroke="#d9772a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14l1.5 1.5L12 13" fill="none" stroke="#d9772a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="14" y1="8.5" x2="17" y2="8.5" stroke="#0e6b7a" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="14.5" x2="17" y2="14.5" stroke="#0e6b7a" stroke-width="2" stroke-linecap="round"/></g>
+  <g id="i-skill"><rect x="3" y="5" width="18" height="12" rx="2" fill="none" stroke="#0e6b7a" stroke-width="2"/><line x1="2" y1="20" x2="22" y2="20" stroke="#0e6b7a" stroke-width="2" stroke-linecap="round"/><path d="M9 11l2 2-2 2m6-4h-2.5" stroke="#d9772a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="i-idea"><path d="M12 3a6 6 0 0 0-3.5 10.9c.5.4.5 1 .5 1.6V16h6v-.5c0-.6 0-1.2.5-1.6A6 6 0 0 0 12 3z" fill="none" stroke="#0e6b7a" stroke-width="2" stroke-linejoin="round"/><line x1="9.5" y1="19" x2="14.5" y2="19" stroke="#d9772a" stroke-width="2" stroke-linecap="round"/><line x1="10.5" y1="21.5" x2="13.5" y2="21.5" stroke="#d9772a" stroke-width="2" stroke-linecap="round"/></g>
+  <g id="i-intro"><path d="M7 3h10v18l-5-4-5 4z" fill="none" stroke="#0e6b7a" stroke-width="2" stroke-linejoin="round"/></g>
+  <g id="i-ref"><path d="M5 4a2 2 0 0 1 2-2h8l4 4v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z" fill="none" stroke="#0e6b7a" stroke-width="2" stroke-linejoin="round"/><line x1="8" y1="11" x2="16" y2="11" stroke="#d9772a" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="15" x2="14" y2="15" stroke="#d9772a" stroke-width="2" stroke-linecap="round"/></g>
+</defs></svg>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="brand"><span class="k">∑</span> E-portafolio · L. Auris</div>
+    <button class="menu-btn" aria-label="Menú" onclick="document.getElementById('lk').classList.toggle('open')">☰</button>
+    <nav class="links" id="lk">
+      <a data-go="portada">Inicio</a>
+      <a data-go="intro">Introducción</a>
+      <a data-go="planeacion">Planeación</a>
+      <a data-go="evidencias">Evidencias</a>
+      <a data-go="habilidades">Habilidades</a>
+      <a data-go="filosofia">Filosofía</a>
+      <a data-go="referencias">Referencias</a>
+    </nav>
+  </div>
+</header>
+
+<!-- PORTADA -->
+<section class="hero" id="portada" style="border:none">
+  <span class="msym" style="font-size:3rem;top:20px;left:40%">π</span>
+  <span class="msym" style="font-size:2.3rem;bottom:30px;left:20%">√</span>
+  <span class="msym" style="font-size:2.6rem;top:60px;left:8%">∞</span>
+  <span class="msym" style="font-size:2rem;bottom:50px;right:38%">Δ</span>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Proyecto integrador · Evidencia final</div>
+      <h1>Portafolio digital de evidencias</h1>
+      <p class="lead">Un recorrido por los recursos que diseñé para enseñar matemática con tecnología, y mi reflexión sobre cómo los llevo al aula real.</p>
+      <div class="id-card">
+        <div><div class="lab">Autora</div><div class="val">Lizbeth Yolanda Auris Aparco</div></div>
+        <div><div class="lab">Asignatura</div><div class="val">Creación de Contenidos, Mobile Learning y Gamificación en el Aula</div></div>
+        <div><div class="lab">Programa</div><div class="val">Maestría en Tecnología Educativa — UNIR</div></div>
+        <div><div class="lab">Docente</div><div class="val">Alma Rios Alcántara</div></div>
+        <div><div class="lab">Entrega</div><div class="val">16 de noviembre de 2026</div></div>
+      </div>
+    </div>
+
+    <div class="hero-side">
+      <div class="hero-art">
+        <svg width="300" height="240" viewBox="0 0 300 240" role="img" aria-label="Estudiantes frente a una pizarra de matemática">
+          <rect x="18" y="14" width="264" height="150" rx="8" fill="#0b4a3f" stroke="#ffffff" stroke-opacity=".5" stroke-width="2"/>
+          <text x="36" y="48" fill="#ffe9c7" font-family="Fraunces,serif" font-size="20">y = 2x + 1</text>
+          <line x1="150" y1="66" x2="150" y2="150" stroke="#8fd3c7" stroke-width="2"/>
+          <line x1="120" y1="135" x2="262" y2="135" stroke="#8fd3c7" stroke-width="2"/>
+          <polyline points="128,150 180,112 240,74" fill="none" stroke="#f2a65a" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="180" cy="112" r="3.5" fill="#ffd27a"/>
+          <circle cx="240" cy="74" r="3.5" fill="#ffd27a"/>
+          <path d="M44 150 l26 0 l-13 -24 z" fill="none" stroke="#8fd3c7" stroke-width="2"/>
+          <text x="46" y="92" fill="#8fd3c7" font-family="Fraunces,serif" font-size="16">π  ∑  √</text>
+          <g transform="translate(70,168)"><circle cx="0" cy="0" r="13" fill="#f3c6a0"/><path d="M-13 0a13 13 0 0 1 26 0z" fill="#3a2a22"/><rect x="-16" y="14" width="32" height="40" rx="12" fill="#2f7d8a"/></g>
+          <g transform="translate(150,172)"><circle cx="0" cy="0" r="14" fill="#e8b48a"/><path d="M-14 -3a14 14 0 0 1 28 0l-2 5h-24z" fill="#5a3b2e"/><rect x="-17" y="15" width="34" height="42" rx="12" fill="#d9772a"/></g>
+          <g transform="translate(230,168)"><circle cx="0" cy="0" r="13" fill="#f0c49a"/><path d="M-13 0a13 13 0 0 1 26 0z" fill="#241a33"/><rect x="-16" y="14" width="32" height="40" rx="12" fill="#6b4e9e"/></g>
+        </svg>
+      </div>
+
+      <!-- ÍNDICE en la portada -->
+      <nav class="hero-index" aria-label="Índice del portafolio">
+        <div class="hi-title">Navega el portafolio</div>
+        <div class="hi-grid">
+          <a class="hidx" data-go="intro"><span class="ic"><svg width="24" height="24"><use href="#i-intro"/></svg></span><div class="t">Introducción</div><div class="d">Propósito del portafolio</div></a>
+          <a class="hidx" data-go="planeacion"><span class="ic"><svg width="24" height="24"><use href="#i-plan"/></svg></span><div class="t">Planeación de evidencias</div><div class="d">Temas, evidencias y formatos</div></a>
+          <a class="hidx" data-ev="1"><span class="ic"><svg width="24" height="24"><use href="#i-video"/></svg></span><div class="t">Evidencia 1 · Videotutorial</div><div class="d">Creación de contenidos</div></a>
+          <a class="hidx" data-ev="2"><span class="ic"><svg width="24" height="24"><use href="#i-game"/></svg></span><div class="t">Evidencia 2 · Reto gamificado</div><div class="d">Mateverso: Código Kuntur</div></a>
+          <a class="hidx" data-ev="3"><span class="ic"><svg width="24" height="24"><use href="#i-rubric"/></svg></span><div class="t">Evidencia 3 · Rúbrica</div><div class="d">Evaluación en CoRubrics</div></a>
+          <a class="hidx" data-go="habilidades"><span class="ic"><svg width="24" height="24"><use href="#i-skill"/></svg></span><div class="t">Habilidades digitales</div><div class="d">Apps aprendidas</div></a>
+          <a class="hidx" data-go="filosofia"><span class="ic"><svg width="24" height="24"><use href="#i-idea"/></svg></span><div class="t">Filosofía educativa</div><div class="d">Mi visión del aprendizaje</div></a>
+          <a class="hidx" data-go="referencias"><span class="ic"><svg width="24" height="24"><use href="#i-ref"/></svg></span><div class="t">Referencias</div><div class="d">Fuentes en APA 7</div></a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" style="padding:0;border:none">
+  <div class="wrap">
+    <div class="stat"><b data-c="3">0</b><span>evidencias</span></div>
+    <div class="stat"><b data-c="4">0</b><span>mundos matemáticos</span></div>
+    <div class="stat"><b data-c="8">0</b><span>misiones del Mateverso</span></div>
+    <div class="stat"><b data-c="7">0</b><span>apartados del portafolio</span></div>
+  </div>
+</section>
+
+<main>
+<!-- INTRODUCCIÓN -->
+<section id="intro" style="scroll-margin-top:60px">
+  <div class="wrap reveal">
+    <span class="tag"><svg width="16" height="16"><use href="#i-intro"/></svg> Introducción</span>
+    <h2 class="sec">El propósito de este portafolio</h2>
+    <p>Soy docente de Matemática de Educación Secundaria y este portafolio reúne las evidencias que construí a lo largo de la asignatura. Su propósito es <strong>mostrar cómo integro las competencias digitales y didácticas</strong> para diseñar experiencias de aprendizaje significativas en el área de matemática, un curso que suele percibirse como difícil y poco motivador.</p>
+    <p>No se trata de acumular herramientas, sino de evidenciar un criterio pedagógico: cada recurso responde a una intención de aprendizaje y a una realidad de aula. Por eso cada evidencia va acompañada de una <strong>reflexión</strong> sobre lo que aprendí, los desafíos que enfrenté y cómo la aplico con mis estudiantes.</p>
+  </div>
+</section>
+
+<!-- PLANEACIÓN -->
+<section id="indice">
+  <div class="wrap reveal">
+    <span class="tag"><svg width="16" height="16"><use href="#i-plan"/></svg> Planeación</span>
+    <h2 class="sec" id="planeacion">Planeación de las evidencias</h2>
+    <table class="plan">
+      <thead><tr><th>Tema</th><th>Mi evidencia</th><th>Formato</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Creación de contenidos digitales</strong></td><td>Videotutorial sobre la creación de imágenes con IA como recurso de aprendizaje</td><td>Enlace (YouTube)</td></tr>
+        <tr><td><strong>Planificación de un reto gamificado</strong></td><td>«Mateverso: Código Kuntur»: narrativa, misiones, avatares e insignias</td><td>Enlace (sitio web)</td></tr>
+        <tr><td><strong>Evaluación digital</strong></td><td>Rúbrica «Mundos matemáticos del Metaverso»</td><td>Enlace (CoRubrics)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- EVIDENCIAS -->
+<section id="evidencias">
+  <div class="wrap reveal">
+    <span class="tag"><svg width="16" height="16"><use href="#i-video"/></svg> Evidencias &amp; reflexión</span>
+    <h2 class="sec">Mis evidencias de aprendizaje</h2>
+    <p>Haz clic en cada pestaña para explorar la evidencia y su reflexión.</p>
+
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-tab="1"><svg><use href="#i-video"/></svg> Evidencia 1 · Videotutorial</button>
+      <button class="tab" data-tab="2"><svg><use href="#i-game"/></svg> Evidencia 2 · Reto gamificado</button>
+      <button class="tab" data-tab="3"><svg><use href="#i-rubric"/></svg> Evidencia 3 · Rúbrica</button>
+    </div>
+
+    <!-- EV1 -->
+    <article class="ev" id="ev1" data-panel="1">
+      <div class="chips"><span class="chip">Creación de contenidos digitales</span><span class="chip b">Formato: enlace (YouTube)</span></div>
+      <h3>Videotutorial del área de matemática</h3>
+      <p>En este videotutorial se explica cómo mediante la IA generativa se puede crear recursos educativos de gran impacto, que pueden ser atractivos para el estudiante y cuya adecuación y pertinencia requiere del visto bueno, pedagógico y profesional del docente.</p>
+      <a class="btn" href="https://www.youtube.com/watch?v=U5i85KiCafg" target="_blank" rel="noopener">▶ Ver el videotutorial en YouTube</a>
+      <div class="rh"><svg width="18" height="18"><use href="#i-idea"/></svg> Reflexión sobre la práctica</div>
+      <div class="reflex3">
+        <div class="rblock c1"><span class="clip"></span><div class="step">1</div><h4>¿Qué aprendí?</h4><p>A transformar una explicación de pizarra en un recurso audiovisual: guionizar el contenido, cuidar el ritmo, la locución y los apoyos visuales. Utilizar la IA generativa como una herramienta atractiva con criterio y fin pedagógico, con actividades de alta demanda, que desarrollen el pensamiento crítico de los estudiantes. Un buen videotutorial permite compartir experiencias con otros colegas y ser una estrategia muy útil en el desarrollo de nuestras sesiones de aprendizaje, adaptable a cualquier tema.</p></div>
+        <div class="rblock c2"><span class="clip"></span><div class="step">2</div><h4>¿Qué desafíos superé?</h4><p>El reto fue sintetizar un tema extenso en pocos minutos sin perder rigor. Lo resolví con un guion previo, ejemplos cercanos y grabación por segmentos para editar los errores; cuidé en especial el audio, que suele ser el punto débil.</p></div>
+        <div class="rblock c3"><span class="clip"></span><div class="step">3</div><h4>¿Cómo lo aplico en el aula?</h4><p>Un videotutorial en aula invertida permite ver el video en casa y dedicar la clase a resolver problemas y dudas. Además queda como material de refuerzo y recuperación para quienes faltaron o necesitan repasar, favoreciendo la autonomía y la atención a la diversidad.</p></div>
+      </div>
+    </article>
+
+    <!-- EV2 -->
+    <article class="ev" id="ev2" data-panel="2" hidden>
+      <div class="chips"><span class="chip">Planificación de un reto gamificado</span><span class="chip b">Formato: enlace (sitio web)</span></div>
+      <h3>«Mateverso: Código Kuntur»</h3>
+      <p>Videojuego o reto gamificado para 2.º de secundaria. En un mundo abierto con paisajes del Perú, Kuntur.IA usa la matemática para mantener el equilibrio. Un virus corrompe el «Código Kuntur» (patrones, igualdades y proporciones) y los estudiantes, convertidos en «rescatadores», recuperan fragmentos resolviendo misiones. Incluye avatares, niveles y XP, 8 clanes, insignias, ranking y una batalla final contra VIA-26.</p>
+      <div class="mundos">
+        <div class="mundo"><svg viewBox="0 0 48 48"><path d="M6 30c6-10 12-10 18 0s12 10 18 0" fill="none" stroke="#d9772a" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="12" r="3" fill="#0e6b7a"/></svg><b>Patrones Nazca</b><span>Progresiones</span></div>
+        <div class="mundo"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="9" fill="none" stroke="#d9772a" stroke-width="3"/><g stroke="#0e6b7a" stroke-width="3" stroke-linecap="round"><line x1="24" y1="6" x2="24" y2="12"/><line x1="24" y1="36" x2="24" y2="42"/><line x1="6" y1="24" x2="12" y2="24"/><line x1="36" y1="24" x2="42" y2="24"/><line x1="11" y1="11" x2="15" y2="15"/><line x1="33" y1="33" x2="37" y2="37"/><line x1="37" y1="11" x2="33" y2="15"/><line x1="15" y1="33" x2="11" y2="37"/></g></svg><b>Ecuaciones del Inti</b><span>Ecuaciones</span></div>
+        <div class="mundo"><svg viewBox="0 0 48 48"><path d="M24 40c-8-4-14-12-14-20 8 0 12 4 14 10 2-6 6-10 14-10 0 8-6 16-14 20z" fill="none" stroke="#1e7a4d" stroke-width="3" stroke-linejoin="round"/><line x1="24" y1="20" x2="24" y2="40" stroke="#0e6b7a" stroke-width="3" stroke-linecap="round"/></svg><b>Amazonía</b><span>Proporcionalidad</span></div>
+        <div class="mundo"><svg viewBox="0 0 48 48"><line x1="8" y1="40" x2="40" y2="40" stroke="#0e6b7a" stroke-width="3" stroke-linecap="round"/><line x1="8" y1="40" x2="8" y2="8" stroke="#0e6b7a" stroke-width="3" stroke-linecap="round"/><path d="M10 34c8 0 10-18 20-22" fill="none" stroke="#d9772a" stroke-width="3" stroke-linecap="round"/></svg><b>Función Lima</b><span>Funciones</span></div>
+      </div>
+      <a class="btn" href="https://lizbethauris27-cyber.github.io/Mateverso1251/" target="_blank" rel="noopener" style="margin-top:14px">🎮 Entrar al Mateverso</a>
+      <div class="rh"><svg width="18" height="18"><use href="#i-idea"/></svg> Reflexión sobre la práctica</div>
+      <div class="reflex3">
+        <div class="rblock c1"><span class="clip"></span><div class="step">1</div><h4>¿Qué aprendí?</h4><p>A planificar una unidad gamificada coherente: definir una narrativa, traducir patrones, igualdades y proporciones en misiones, y articular avatares, niveles, XP, clanes e insignias con un propósito pedagógico y no solo decorativo. Utilizar la IA generativa para crear una plataforma amigable, con diferentes recursos interactivos en torno a una temática atractiva que relaciona la Matemática y el patrimonio cultural del Perú. La gamificación bien diseñada ordena la progresión y gestiona la motivación.</p></div>
+        <div class="rblock c2"><span class="clip"></span><div class="step">2</div><h4>¿Qué desafíos superé?</h4><p>Evitar que el juego tapara la matemática. Lo superé alineando cada misión con una capacidad del currículo y con criterios de evaluación claros, de modo que ganar XP implicara demostrar aprendizaje. En lo técnico, publicar el sitio en GitHub Pages exigió orden y pruebas.</p></div>
+        <div class="rblock c3"><span class="clip"></span><div class="step">3</div><h4>¿Cómo lo aplico en el aula?</h4><p>Lo implemento en el horario de refuerzo: cada semana se recupera un fragmento de código en uno de los mundos del Metaverso. El ranking y los clanes fomentan colaboración y perseverancia, y las insignias visibilizan logros de estudiantes que en la evaluación tradicional pasan desapercibidos.</p></div>
+      </div>
+    </article>
+
+    <!-- EV3 -->
+    <article class="ev" id="ev3" data-panel="3" hidden>
+      <div class="chips"><span class="chip">Evaluación digital</span><span class="chip b">Formato: enlace (CoRubrics)</span></div>
+      <h3>Rúbrica «Mundos matemáticos del Metaverso»</h3>
+      <p>Rúbrica elaborada en CoRubrics para evaluar el desempeño en el Mateverso. Tiene cuatro criterios —progresiones aritméticas (Patrones Nazca), ecuaciones (Ecuaciones del Inti), proporcionalidad (Amazonía Proporcional) y funciones (Función Lima)—, cada uno con el 25 % del peso, y una escala de cuatro niveles: Inicio, Proceso, Logrado y Destacado.</p>
+      <a class="btn" href="https://www.corubrics.co/rb/7d837530-9560-4c8f-a457-196f39f079cf.YTKTVf9OfZv-CUZt6rFvSx4LCPDP-PxZd31LB3WvcjU" target="_blank" rel="noopener">📋 Ver la rúbrica en CoRubrics</a>
+      <div class="rh"><svg width="18" height="18"><use href="#i-idea"/></svg> Reflexión sobre la práctica</div>
+      <div class="reflex3">
+        <div class="rblock c1"><span class="clip"></span><div class="step">1</div><h4>¿Qué aprendí?</h4><p>A diseñar una evaluación digital alineada con la gamificación. Construí en CoRubrics una rúbrica con cuatro criterios y cuatro niveles de logro, y comprendí que una buena rúbrica hace transparente lo que se espera y convierte la calificación en retroalimentación, no en un número aislado. Comprendí que los descriptores permiten clarificar qué se espera que el estudiante logre y son una guía para los estudiantes. Además descubrí que CoRubrics permite la autoevaluación, coevaluación y heteroevaluación, mediante formularios enviados por correo electrónico.</p></div>
+        <div class="rblock c2"><span class="clip"></span><div class="step">2</div><h4>¿Qué desafíos superé?</h4><p>Redactar descriptores observables que distinguieran los niveles sin ambigüedad. Lo resolví anclando cada nivel a evidencias concretas del desempeño —explica el procedimiento, justifica, verifica— y revisando la redacción con casos reales de mis estudiantes.</p></div>
+        <div class="rblock c3"><span class="clip"></span><div class="step">3</div><h4>¿Cómo lo aplico en el aula?</h4><p>La comparto antes de la tarea para que autoevalúen y coevalúen su trabajo del Mateverso; CoRubrics automatiza el cálculo y agiliza la devolución. Así la evaluación es formativa, coherente con las misiones y centrada en la mejora, no solo en la nota.</p></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- HABILIDADES -->
+<section id="habilidades">
+  <div class="wrap reveal">
+    <span class="tag"><svg width="16" height="16"><use href="#i-skill"/></svg> Habilidades digitales</span>
+    <h2 class="sec">Apps aprendidas y su utilidad</h2>
+    <div class="skills">
+      <div class="skill"><span class="si"><svg><use href="#i-plan"/></svg></span><div><b>Google Sites / Wix / Genially</b><span>Crear sitios web públicos y organizar la navegación: ideal para portafolios y compartir contenido.</span></div></div>
+      <div class="skill"><span class="si"><svg><use href="#i-video"/></svg></span><div><b>YouTube + editor de video</b><span>Producir y publicar videotutoriales reutilizables; sostiene el aula invertida y el refuerzo autónomo.</span></div></div>
+      <div class="skill"><span class="si"><svg><use href="#i-game"/></svg></span><div><b>GitHub Pages (HTML/CSS/JS)</b><span>Publicar recursos web propios de forma gratuita y pública, como el Mateverso.</span></div></div>
+      <div class="skill"><span class="si"><svg><use href="#i-rubric"/></svg></span><div><b>CoRubrics (Google Sheets)</b><span>Diseñar rúbricas, automatizar la calificación y habilitar la coevaluación y autoevaluación.</span></div></div>
+      <div class="skill"><span class="si"><svg><use href="#i-skill"/></svg></span><div><b>Khan Academy</b><span>Asignar práctica autónoma, dar seguimiento al avance y evaluar por competencias.</span></div></div>
+      <div class="skill"><span class="si"><svg><use href="#i-idea"/></svg></span><div><b>Genially / Canva</b><span>Diseñar insignias, avatares, infografías y presentaciones interactivas para gamificar.</span></div></div>
+      <div class="skill"><span class="si"><svg><use href="#i-rubric"/></svg></span><div><b>Google Forms / Quizizz</b><span>Evaluación diagnóstica y formativa con retroalimentación inmediata.</span></div></div>
+      <div class="skill"><span class="si"><svg><use href="#i-plan"/></svg></span><div><b>Google Drive / Classroom</b><span>Organizar, compartir y recoger evidencias; gestionar la comunicación con estudiantes.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FILOSOFÍA -->
+<section id="filosofia">
+  <div class="wrap reveal">
+    <div class="philo">
+      <svg class="philo-art" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="40" r="20" fill="none" stroke="#fff" stroke-width="3"/><rect x="40" y="62" width="40" height="46" rx="14" fill="none" stroke="#fff" stroke-width="3"/><text x="18" y="30" fill="#fff" font-family="Fraunces,serif" font-size="22">∑</text><text x="92" y="100" fill="#fff" font-family="Fraunces,serif" font-size="22">π</text></svg>
+      <span class="tag" style="background:rgba(255,255,255,.15);color:#bfe3e9"><svg width="16" height="16"><use href="#i-idea"/></svg> Filosofía educativa</span>
+      <h2 class="sec">Mi visión del aprendizaje y la tecnología</h2>
+      <p>Creo que aprender matemática es aprender a pensar: a buscar patrones, argumentar y resolver problemas con sentido. Entiendo el aprendizaje como un proceso activo, en el que el estudiante construye el conocimiento y se equivoca sin miedo, y donde el error es información para mejorar, no un castigo.</p>
+      <p>Mi rol como docente es diseñar experiencias: proponer retos, acompañar, retroalimentar y abrir el camino para que cada estudiante avance con autonomía. El estudiante es protagonista y la tecnología, un medio. Un videotutorial, un mundo gamificado o una rúbrica digital valen por lo que hacen posible: personalizar, motivar y evaluar para aprender.</p>
+      <p>Mi meta como creadora de experiencias digitales de aprendizaje es acercar la matemática a la vida de mis estudiantes, usando recursos de nuestro contexto y herramientas que amplíen el juicio pedagógico. Quiero aulas donde la tecnología sirva para promover el gusto por aprender.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCIAS -->
+<section id="referencias">
+  <div class="wrap reveal">
+    <span class="tag">Referencias · APA 7</span>
+    <h2 class="sec">Referencias</h2>
+    <ul class="refs">
+      <li>Anthropic. (2026). <em>Claude</em> (Opus 4.8) [Modelo de lenguaje grande]. https://claude.ai</li>
+      <li>Auris Aparco, L. Y. (2026). <em>Mateverso: Código Kuntur</em> [Recurso gamificado]. GitHub Pages. https://lizbethauris27-cyber.github.io/Mateverso1251/</li>
+      <li>Auris Aparco, L. Y. (2026). <em>Videotutorial del área de matemática</em> [Video]. YouTube. https://www.youtube.com/watch?v=U5i85KiCafg</li>
+      <li>CoRubrics. (2026). <em>Mundos matemáticos del Metaverso</em> [Rúbrica]. https://www.corubrics.co/</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">E-portafolio de evidencias · Lizbeth Yolanda Auris Aparco · Maestría en Tecnología Educativa, UNIR · 2026</div></footer>
+
+<button id="top" aria-label="Ir arriba" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  const prog=document.getElementById('prog'),topBtn=document.getElementById('top');
+  function onScroll(){const h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';topBtn.classList.toggle('show',h.scrollTop>400);}
+  window.addEventListener('scroll',onScroll);onScroll();
+
+  function goTo(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});document.getElementById('lk').classList.remove('open');}
+  document.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',()=>goTo(a.dataset.go)));
+
+  function openEv(n){document.querySelectorAll('.ev').forEach(p=>p.hidden=(p.dataset.panel!==String(n)));document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===String(n)));}
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>openEv(t.dataset.tab)));
+  document.querySelectorAll('[data-ev]').forEach(a=>a.addEventListener('click',()=>{openEv(a.dataset.ev);goTo('evidencias');}));
+
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const cio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){const el=e.target,t=+el.dataset.c;let i=0;const s=Math.max(1,Math.ceil(t/18)),tick=()=>{i=Math.min(t,i+s);el.textContent=i;if(i<t)requestAnimationFrame(tick);};tick();cio.unobserve(el);}})},{threshold:.6});
+  document.querySelectorAll('[data-c]').forEach(el=>cio.observe(el));
+
+  const secMap={portada:'portada',intro:'intro',indice:'planeacion',evidencias:'evidencias',habilidades:'habilidades',filosofia:'filosofia',referencias:'referencias'};
+  const navLinks=[...document.querySelectorAll('nav.links a')];
+  const spy=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){const k=secMap[e.target.id];navLinks.forEach(a=>a.classList.toggle('on',a.dataset.go===k));}})},{rootMargin:'-45% 0px -50% 0px'});
+  ['portada','intro','indice','evidencias','habilidades','filosofia','referencias'].forEach(id=>{const el=document.getElementById(id);if(el)spy.observe(el);});
+</script>
+</body>
+</html>
